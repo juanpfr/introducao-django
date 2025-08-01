@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Receitas cadastradas</h1>
+    {% for recipe in recipes %}
+        <h2>{{ recipe.title }}</h2>
+        <p>
+            <strong>Tempo de preparo:</strong>
+            {{ recipe.cooking_time }} minutos
+        </p>
+        <p>
+            <strong>Ingredientes:</strong>
+            {{ recipe.ingredients }}
+        </p>
+        <p>
+            <strong>Instruções:</strong>
+            {{ recipe.instructions }}
+        </p>
+        <hr>
+    {% empty %}
+        <p>Nenhuma receita cadastrada</p>
+    {% endfor %}
+</body>
+</html>
