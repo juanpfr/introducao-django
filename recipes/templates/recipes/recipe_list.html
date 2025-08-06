@@ -3,27 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Receitas</title>
+    <script src="https:cdn.tailwindcss.com"></script>
+    <style>
+        body{
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .container{
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h1{
+            color: #1f2937;
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .recipe-item{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-item img{
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .recipe-content{
+            flex-grow: 1;
+        }
+
+        h2{
+            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        h2 a{
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        h2 a:hover{
+            color: #3730a3;
+            text-decoration: underline;
+        }
+
+        p{
+            margin-bottom: 0.5rem;
+        }
+
+        strong{
+            font-weight: 600;
+        }
+
+        hr{
+            border-top: 1px solid #e5e7eb;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-message{
+            text-align: center;
+            font-style: italic;
+            color: #6b7280;
+            padding: 1rem;
+            border: 1px dashed #d1d5db;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Receitas cadastradas</h1>
-    {% for recipe in recipes %}
-        <h2>{{ recipe.title }}</h2>
-        <p>
-            <strong>Tempo de preparo:</strong>
-            {{ recipe.cooking_time }} minutos
-        </p>
-        <p>
-            <strong>Ingredientes:</strong>
-            {{ recipe.ingredients }}
-        </p>
-        <p>
-            <strong>Instruções:</strong>
-            {{ recipe.instructions }}
-        </p>
-        <hr>
-    {% empty %}
-        <p>Nenhuma receita cadastrada</p>
-    {% endfor %}
+    <div class="container">
+        <h1>Receitas cadastradas</h1>
+        {% for recipe in recipes %}
+            <div class="recipe-item">
+                {% if recipe.image %}
+                    <img src="{{ recipe.image }}" alt="">
+                {% endif %}
+                <div class="recipe-content">
+                    <h2>
+                        <a href="{% url 'recipe_detail' recipe.pk %}">
+                            {{ recipe.title }}
+                        </a>
+                    </h2>
+                    <p>
+                        <strong>Tempo de preparo:</strong>
+                        {{ recipe.cooking_time }} minutos
+                    </p>
+                    <p>
+                        <strong>Ingredientes:</strong>
+                        {{ recipe.ingredients }}
+                    </p>
+                    <p>
+                        <strong>Instruções:</strong>
+                        {{ recipe.instructions }}
+                    </p>
+                    <hr>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">Nenhuma receita cadastrada</p>
+        {% endfor %}
+    </div>
 </body>
 </html>
