@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ recip.title }}</title>
+    <title>{{ recipe.title }}</title>
 
     <style>
         body{
@@ -54,13 +54,13 @@
 <body>
     <div class="container"> 
         <a href="{% url 'recipe_list' %}" class="back-link">Voltar para a lista</a>
-        <h1>{{recipe-title}}</h1>
+        <h1>{{ recipe.title }}</h1>
         {% if recipe.image %}
             <img src="{{ recipe.image.url}}" alt="">
         {% endif %}
         <p>
             <strong>Tempo de preparo:</strong>
-             {{recipe.cooking_time}} minutos
+             {{ recipe.cooking_time }} minutos
         </p>
         <h2>Ingredientes:</h2>
         <p>{{ recipe.ingredients }}</p>
