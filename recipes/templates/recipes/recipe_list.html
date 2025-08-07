@@ -99,7 +99,7 @@
         {% for recipe in recipes %}
             <div class="recipe-item">
                 {% if recipe.image %}
-                    <img src="{{ recipe.image }}" alt="">
+                    <img src="{{ recipe.image.url}}" alt="">
                 {% endif %}
                 <div class="recipe-content">
                     <h2>
